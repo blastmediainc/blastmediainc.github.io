@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Blast Media | Tools</title>
+<link rel="icon" type="image/png" href="favicon.png"><link rel="shortcut icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{font-family:Lato,Arial,sans-serif;color:#202b30;background:#f4f6f5;--green:#a5cd3a;--green-dark:#519033;--muted:#64747b;--line:#dfe6e5;--panel:#fff}
+*{box-sizing:border-box}body{margin:0;background:#f4f6f5;font-family:Lato,Arial,sans-serif}button,input{font:inherit}a{text-decoration:none;color:inherit}
+.header{height:220px;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 3px 18px rgba(18,38,27,.055)}.header-inner{max-width:1160px;margin:auto;height:100%;padding:0 28px;display:flex;align-items:center;justify-content:center;gap:20px}.brand img{display:block;width:760px;max-width:100%;height:auto;max-height:190px;object-fit:contain;object-position:center}.header-label{color:#71807a;font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+main{max-width:1160px;padding:0 28px 65px;margin:auto}.hero{padding:66px 0 40px}.eyebrow{font-size:12px;letter-spacing:.16em;color:var(--green-dark);font-weight:900;text-transform:uppercase}.hero h1{font-size:clamp(35px,5.5vw,55px);line-height:1.1;letter-spacing:-.035em;margin:15px 0 14px;font-weight:900}.hero h1 span{color:var(--green-dark)}.hero p{font-size:16px;line-height:1.7;color:var(--muted);max-width:610px;margin:0}
+.toolbar{padding-top:32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px;margin:16px 0 22px}.section-title{font-size:20px;font-weight:900}.section-title small{font-size:12px;font-weight:700;color:#82908a;margin-left:10px}.search{background:#fff;border:1px solid #cbd7d2;border-radius:8px;min-width:250px;max-width:100%;padding:0 14px}.search input{width:100%;border:0;outline:0;background:transparent;padding:12px 0;color:#202b30;font-size:13px}.search:focus-within{outline:2px solid var(--green);outline-offset:2px}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.card{min-height:244px;background:#fff;border:1px solid #dfe6e5;border-radius:12px;padding:29px;display:flex;flex-direction:column;transition:transform .18s,border-color .18s,box-shadow .18s}.card:hover{transform:translateY(-3px);border-color:var(--green);box-shadow:0 12px 30px #223b2714}.card:focus-visible{outline:3px solid var(--green);outline-offset:3px}.card-top{display:flex;justify-content:flex-end}.tag{font-size:10px;font-weight:900;letter-spacing:.1em;color:var(--green-dark);border:1px solid #d6e9c6;background:#f1f8eb;border-radius:99px;padding:7px 11px;text-transform:uppercase}.card h2{font-size:25px;font-weight:900;letter-spacing:-.02em;margin:18px 0 9px}.card p{font-size:14px;line-height:1.7;color:#687a73;margin:0 0 25px;max-width:460px}.launch{margin-top:auto;color:var(--green-dark);font-size:13px;font-weight:900}.lower{margin-top:22px;background:#fff;border:1px dashed #c8d7cf;border-radius:12px;padding:24px 29px}.lower h3{margin:0 0 7px;font-size:17px}.lower p{margin:0;color:#73817a;font-size:13px;line-height:1.6}.footer{font-size:12px;color:#87958e;margin-top:40px}.empty{padding:35px;text-align:center;color:#65756d;border:1px dashed #c8d7cf;border-radius:12px}.empty[hidden]{display:none}
+@media(max-width:700px){.header-inner,main{padding-left:20px;padding-right:20px}.header-label{display:none}.header{height:155px}.brand img{width:520px;max-height:135px}.hero{padding:47px 0 28px}.cards{grid-template-columns:1fr}.search{width:100%}.card{min-height:220px}.hero h1{font-size:40px}}
+</style>
+</head><body>
+<header class="header"><div class="header-inner"><a class="brand" href="./" aria-label="Blast Media Tools home"><img src="blast-media-logo.png" alt="Blast Media"></a></div></header>
+<main>
+<section aria-labelledby="tools-title"><div class="toolbar"><div id="tools-title" class="section-title">Your tools <small id="count"></small></div><label class="search"><input id="search-input" type="search" placeholder="Search tools..." aria-label="Search tools"></label></div><div class="cards" id="cards"></div><div class="empty" id="empty" hidden>No tools match your search.</div></section>
+<section class="lower"><h3>More tools on the way</h3><p>Add new projects to the dashboard whenever they're ready.</p></section><footer class="footer">© <span id="year"></span> Blast Media · Tools Dashboard</footer></main>
+<script>
+// ADD FUTURE PROJECTS HERE: duplicate an entry and update its name, description, and URL.
+const PROJECTS = [
+ {name:'Rinkboard Builder',description:'Create rinkboard layouts, manage artwork, and export print-ready proofs and production files.',url:'https://blastmediainc.github.io/rinkboards/',category:'Production'},
+ {name:'Quoting Calculator',description:'Build estimates and calculate pricing for print and production projects.',url:'https://blastmediainc.github.io/quotingcalculator/',category:'Estimating'}
+];
+const cards=document.getElementById('cards'),search=document.getElementById('search-input'),empty=document.getElementById('empty'),count=document.getElementById('count');
+function render(){const q=search.value.trim().toLowerCase();const visible=PROJECTS.filter(p=>(p.name+' '+p.description+' '+p.category).toLowerCase().includes(q));cards.replaceChildren();for(const p of visible){const a=document.createElement('a');a.className='card';a.href=p.url;a.target='_blank';a.rel='noopener noreferrer';const h=document.createElement('h2');h.textContent=p.name;const d=document.createElement('p');d.textContent=p.description;const go=document.createElement('div');go.className='launch';go.textContent='Open tool';a.append(h,d,go);cards.append(a)}count.textContent=`${visible.length} ${visible.length===1?'tool':'tools'}`;empty.hidden=visible.length!==0}
+search.addEventListener('input',render);document.getElementById('year').textContent=new Date().getFullYear();render();
+</script></body></html>
