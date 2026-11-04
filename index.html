@@ -25,7 +25,8 @@ main{max-width:1160px;padding:0 28px 65px;margin:auto}.hero{padding:66px 0 40px}
 // ADD FUTURE PROJECTS HERE: duplicate an entry and update its name, description, and URL.
 const PROJECTS = [
  {name:'Rinkboard Builder',description:'Create rinkboard layouts, manage artwork, and export print-ready proofs and production files.',url:'https://blastmediainc.github.io/rinkboards/',category:'Production'},
- {name:'Quoting Calculator',description:'Build estimates and calculate pricing for print and production projects.',url:'https://blastmediainc.github.io/quotingcalculator/',category:'Estimating'}
+ {name:'Quoting Calculator',description:'Build estimates and calculate pricing for print and production projects.',url:'https://blastmediainc.github.io/quotingcalculator/',category:'Estimating'},
+ {name:'Proof Builder',description:'Create production mockups from uploaded artwork with editable quantities, materials, instructions, shipping details, and deadlines.',url:'https://blastmediainc.github.io/proofbuilder/',category:'Production'}
 ];
 const cards=document.getElementById('cards'),search=document.getElementById('search-input'),empty=document.getElementById('empty'),count=document.getElementById('count');
 function render(){const q=search.value.trim().toLowerCase();const visible=PROJECTS.filter(p=>(p.name+' '+p.description+' '+p.category).toLowerCase().includes(q));cards.replaceChildren();for(const p of visible){const a=document.createElement('a');a.className='card';a.href=p.url;a.target='_blank';a.rel='noopener noreferrer';const h=document.createElement('h2');h.textContent=p.name;const d=document.createElement('p');d.textContent=p.description;const go=document.createElement('div');go.className='launch';go.textContent='Open tool';a.append(h,d,go);cards.append(a)}count.textContent=`${visible.length} ${visible.length===1?'tool':'tools'}`;empty.hidden=visible.length!==0}
